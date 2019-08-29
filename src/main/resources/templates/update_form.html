@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ویرایش بارنامه</title>
+    <link rel="icon" type="image/png" href="images/logo.png"/>
+    <meta charset="utf-8">
+    <meta categoryName="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/alignment.css}" typeBar="text/css">
+    <link rel="stylesheet" th:href="@{/css/table.css}" typeBar="text/css">
+    <link rel="stylesheet" href="../static/css/table.css" typeBar="text/css">
+
+    <!--for animate input-->
+    <link rel="stylesheet" th:href="@{/css/main.css}" typeBar="text/css">
+    <link rel="stylesheet" th:href="@{/css/upform.css}" typeBar="text/css">
+    <link rel="stylesheet" th:href="@{/css/uputil.css}" typeBar="text/css">
+    <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+    <script type="text/javascript" th:src="@{/js/upjquery.js}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/jquery.md.bootstrap.datetimepicker.style.css}" typeBar="text/css">
+    <script type="application/javascript" th:src="@{/js/jquery.md.bootstrap.datetimepicker.js}"></script>
+
+</head>
+<body onload="prepareWebPage()">
+
+
+<div class="alert alert-success" id="myDIV" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">اطلاعات با موفقیت ثبت شد</p>
+</div>
+
+<div class="alert alert-danger" id="weight_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">وزن را وارد کنید</p>
+</div>
+
+<div class="alert alert-danger" id="date_send_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">فرمت تاریخ ارسال را به درستی وارد کنید</p>
+</div>
+
+<div class="alert alert-danger" id="date_rec_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">فرمت تاریخ دریافت را به درستی وارد کنید</p>
+</div>
+
+<div class="alert alert-danger" id="date_periority_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">تاریخ ارسال بعد از دریافت وارد شده است</p>
+</div>
+
+<div class="alert alert-danger" id="cod_ntn_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">کد ملی صحیح نمی باشد</p>
+</div>
+
+<div class="alert alert-danger" id="tel_driver_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">شماره تلفن حاوی 11 عدد است</p>
+</div>
+
+<div class="alert alert-danger" id="cod_post_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">کد پستی حاوی 10 عدد است</p>
+</div>
+
+<div class="alert alert-danger" id="cod_cod_ntn_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">شناسه ملی اشتباه وارد شده است</p>
+</div>
+
+
+<nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light background-image">
+
+    <a href="/home"><img src="/images/logo.png"></a>
+</nav>
+
+<div>
+
+</div>
+<form dir="rtl" class="center font_text container" style="padding: 10px;" name="form"
+      action="#" th:action="@{/updatewaybil}" th:object="${waybil}" method="post" onsubmit="return validate();">
+    <table dir="rtl " class="thead-light was-validated ">
+        <div class="container" dir="rtl">
+            <tr style="background-color: #2f9eb5">
+                <td>
+                    <label for="date_created" style="margin-right: 20px;margin-top: 5px;float: right">تاریخ ثبت
+                        :</label>
+                    <label id="date_created" th:field="*{sCreateDate}" class="form-control"
+                           style="text-align: center;width:120px;margin-top: 5px;margin-right: 140px"></label>
+                </td>
+                <td><b><h1 class="font_text">ویرایش بارنامه</h1></b></td>
+                <td></td>
+                <td>
+                    <!--<label for="status2" style="margin-top: 5px;float: right;margin-left: 180px">وضعیت بارنامه :</label>-->
+                    <label id="status2" th:field="*{status}" th:value="${'02'}" class="form-control"
+                           style="text-align: center;margin-top: 5px;width: fit-content">در حال تکمیل</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="input-group" style="margin-top: 10px">
+                        <input typeBar="text" name="sendDate" id="start_date" th:field="*{sStartDate}"
+                               class="form-control" placeholder="تاریخ ارسال بارنامه" categoryName="start_date"
+                               aria-label="date1" aria-describedby="date1" onblur="check_value_date()"
+                               required="required">
+                        <span class="input-group-addon cursor-pointer" id="date1"><img src="/images/calender.png"
+                                                                                       style="margin-top: -5px"></span>
+                    </div>
+
+                    <!--<div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-top: 10px">-->
+                    <!--<input class="input100" type="text" name="sendDate" th:field="*{sStartDate}" id="start_date"-->
+                    <!--required="required" categoryName="start_date" max="10000000" onblur="check_value_date()">-->
+                    <!--<span class="focus-input100" data-placeholder="تاریخ ارسال"></span>-->
+                    <!--</div>-->
+                    <!--<div class="input-group" >-->
+                    <!--<span class="input-group-addon cursor-pointer" id="date1"><img src="/images/calender.png"></span>-->
+                    <!--</div>-->
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    <div class="input-group" style="margin-right: 150px;margin-top: 10px">
+                        <input typeBar="text" name="receivedDate" id="finish_date" th:field="*{sFinishDate}"
+                               class="form-control " placeholder="تاریخ دریافت بارنامه " categoryName="finish_date"
+                               aria-label="date2" aria-describedby="date2" required="required"
+                               onblur="check_value_date()">
+                        <span class="input-group-addon cursor-pointer" id="date2"><img src="/images/calender.png"
+                                                                                       style="margin-top: -5px"></span>
+                    </div>
+                </td>
+
+            </tr>
+            <tr>
+                <!--<td>-->
+                <!--<label for="weight2" style="margin-top: 5px;float: right">وزن بار :</label>-->
+                <!--</td>-->
+                <td>
+                    <!--<input type="number" name="weight" th:field="*{weight}" class="form-control" id="weight2" placeholder="وزن بار به تن وارد کنید" max="10000000" >-->
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-top: 20px">
+                        <input class="input100" type="number" name="weight" th:field="*{weight}"
+                               required="required" categoryName="start_date" max="10000000">
+                        <span class="focus-input100" data-placeholder="وزن بار"></span>
+                    </div>
+                </td>
+
+                <td>
+                    <select id="typeBar" th:field="*{typeBar}" class="form-control" style="margin-right: 60px">
+                        <option value="">نوع بار</option>
+                        <option th:each="ValueLookup : ${list_lookup}"
+                                th:value="${ValueLookup.lookupIdentify.valueLookUP}"
+                                th:text="${ValueLookup.desFarsi}">
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-right: 100px">
+                        <input class="input100" type="number" name="weight" th:field="*{costTransfer}"
+                               required="required" categoryName="start_date" max="10000000">
+                        <span class="focus-input100" data-placeholder="هزینه حمل"></span>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl"
+                         style="margin-right: 150px;width: 140px">
+                        <input class="input100" type="number" name="weight" th:field="*{costInsurance}"
+                               categoryName="start_date" max="10000000">
+                        <span class="focus-input100" data-placeholder="هزینه بیمه"></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl">
+                        <input class="input100" type="text" name="weight" th:field="*{driverName}" id="name_Driver"
+                               maxlength="25" required="required">
+                        <span class="focus-input100" data-placeholder="نام راننده"></span>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-right: 60px">
+                        <input class="input100" type="number" name="weight" th:field="*{driverNationalCode}"
+                               id="national_Code_Driver"
+                               maxlength="10" required="required" minlength="10" onblur="return check_National_Code()">
+                        <span class="focus-input100" data-placeholder="کد ملی راننده"></span>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-right: 100px">
+                        <input class="input100" type="number" name="weight" th:field="*{driverPhone}" id="phone_Driver"
+                               maxlength="12" minlength="10" onblur="check_tel_Driver()">
+                        <span class="focus-input100" data-placeholder="تلفن راننده"></span>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl"
+                         style="margin-right: 150px;width: 140px">
+                        <input class="input100" type="number" name="weight" th:field="*{driverLicsDriving}"
+                               id="number_Lics_Driver"
+                               maxlength="12" minlength="10">
+                        <span class="focus-input100" data-placeholder="شماره گواهینامه راننده "></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+
+                <td>
+                    <select id="kind_Auto" th:field="*{carKind}" class="form-control">
+                        <option value="">نوع ماشین</option>
+                        <option th:each="ValueLookup : ${list_cars}"
+                                th:value="${ValueLookup.lookupIdentify.valueLookUP}"
+                                th:text="${ValueLookup.desFarsi}">
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <!--pelak mashine-->
+                    <label for="car_Tag_Auto" th:field="*{carTag}" style="float: right ; margin-right: 20px">پلاک
+                        ماشین</label>
+                </td>
+                <td>
+                    <div class="input-group" dir="ltr">
+                        <input th:field="*{firstPart_carTag}" type="number" class="form-control" id="car_Tag_Auto"
+                               style="width: 40px;text-align: center" min="10" max="99">
+                        <label th:field="*{letterPart_carTag}" class="form-control"
+                               style="width: 10px;text-align: center">ع</label>
+                        <input th:field="*{secondPart_carTag}" type="number" class="form-control"
+                               style="width: 45px;text-align: center" min="100" max="999">
+                        <input th:field="*{lastPart_carTag}" type="number" class="form-control"
+                               style="text-align: center" placeholder="ایران 13" min="10" max="99">
+                    </div>
+
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-top: 16px">
+                        <input class="input100" type="text" name="weight" th:field="*{senderName}" id="name_sender"
+                               maxlength="25">
+                        <span class="focus-input100" data-placeholder="نام فرستنده"></span>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl"
+                         style="margin-right: 60px;margin-top: 16px">
+                        <input class="input100" type="number" name="weight" th:field="*{senderIdentifyCode}"
+                               id="national_Identify_Sender"
+                               maxlength="20" required="required" minlength="10" onblur="return check_Cod_NTN_Sender()">
+                        <span class="focus-input100" data-placeholder="شناسه ملی فرستنده"></span>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl"
+                         style="margin-right: 100px;margin-top: 16px">
+                        <input class="input100" type="number" name="weight" th:field="*{senderPhone}" id="phone_Sender"
+                               maxlength="12" minlength="10" onblur="check_tel_Driver()">
+                        <span class="focus-input100" data-placeholder="تلفن فرستنده"></span>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl"
+                         style="margin-right: 150px;width: 140px;margin-top: 16px">
+                        <input class="input100" type="number" name="weight" th:field="*{senderPostCode}"
+                               id="post_Code_Sender"
+                               maxlength="20" onblur="check_Sender_Cod_post()">
+                        <span class="focus-input100" data-placeholder="کد پستی فرستنده "></span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl">
+                        <input class="input100" type="text" name="weight" th:field="*{receiverName}" id="name_Reciever"
+                               maxlength="25">
+                        <span class="focus-input100" data-placeholder="نام گیرنده"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-right: 60px">
+                        <input class="input100" type="number" name="weight" th:field="*{receiverIdentifyCode}"
+                               id="national_Identify_Receiver"
+                               maxlength="20" required="required" minlength="10"
+                               onblur="return check_Cod_NTN_Reciever()">
+                        <span class="focus-input100" data-placeholder="شناسه ملی گیرنده"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-right: 100px">
+                        <input class="input100" type="number" name="weight" th:field="*{receiverPhone}"
+                               id="phone_Receiver"
+                               maxlength="12">
+                        <span class="focus-input100" data-placeholder="تلفن گیرنده"></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="wrap-input100 alignment-right input-group" dir="rtl"
+                         style="margin-right: 150px;width: 140px">
+                        <input class="input100" type="number" name="weight" th:field="*{receiverPostCode}"
+                               id="post_Code_Receiver"
+                               maxlength="20" onblur="check_Reciever_Cod_Post()">
+                        <span class="focus-input100" data-placeholder="کد پستی گیرنده "></span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" th:field="*{des}" placeholder="توضیحات اضافی در مورد بارنامه را وارد کنید "
+                           style="font-size: large;width:max-content " maxlength="100">
+                </td>
+                <td>
+                    <!-- Modal -->
+                    <input class="btn btn-primary" type="submit" value="ویرایش بارنامه" onclick=""></input>
+                </td>
+
+            </tr>
+        </div>
+
+    </table>
+
+</form>
+
+<form dir="rtl" class="center font_text" style="padding: 10px;margin-top: -55px;margin-right: -300px"
+      action="#" th:action="@{/deletewaybil}" th:object="${waybilForDelete}" method="post"
+      onsubmit="return confirmation_delete()">
+    <input class="btn btn-danger" type="submit" value="حذف بارنامه"/>
+</form>
+
+
+<script>
+    function validate() {
+        var resultWeight = checkWeight();
+        if (resultWeight) {
+            if (checkDateFormat()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    function checkWeight() {
+        var weightValue = document.forms["form"]["weight"].value;
+
+        if (isNaN(weightValue) || weightValue == "" || weightValue < 0) {
+            scrollTop();
+            document.getElementById("weight_error").style.display = "block";
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function checkDateFormat() {
+        // var sendDate = document.forms["form"]["sendDate"];
+        var sendDate = document.getElementById("start_date").value;
+        var partOneSend = sendDate.charAt(4);
+        var partTwoSend = sendDate.charAt(7);
+        if (partOneSend != "/" || partTwoSend != "/") {
+            document.getElementById("date_send_error").style.display = "block";
+            return false;
+        }
+        // for reciver
+        // var receivedDate = document.forms["form"]["receivedDate"].value;
+        var receivedDate = document.getElementById("finish_date").value;
+        var partOneReceiver = receivedDate.charAt(4);
+        var partTwoReceiver = receivedDate.charAt(7);
+        if (partOneReceiver != "/" || partTwoReceiver != "/") {
+            document.getElementById("date_rec_error").style.display = "block";
+            return false;
+        }
+        if (!check_value_date(sendDate, receivedDate))
+            return false;
+        return true
+    }
+
+    function parseArabic(str) {
+        return Number(str.replace(/[٠١٢٣٤٥٦٧٨٩]/g, function (d) {
+            return d.charCodeAt(0) - 1632; // Convert Arabic numbers
+        }).replace(/[۰۱۲۳۴۵۶۷۸۹]/g, function (d) {
+            return d.charCodeAt(0) - 1776; // Convert Persian numbers
+        }));
+    }
+
+    function check_value_date(sendDate, receivedDate) {
+        if (sendDate == null) {
+            sendDate = document.getElementById("start_date").value;
+            receivedDate = document.getElementById("finish_date").value;
+        }
+        var arrSend = sendDate.split("/");
+        var arrReceived = receivedDate.split("/");
+        debugger;
+        for (var i = 0; i < arrSend.length; i++) {
+            arrSend[i] = parseArabic(arrSend[i]);
+            arrReceived[i] = parseArabic(arrReceived[i]);
+        }
+        if (arrSend[0] > arrReceived[0] ||
+            arrSend[1] > arrReceived[1] ||
+            arrSend[2] > arrReceived[2]) {
+            scrollTop();
+            document.getElementById("date_periority_error").style.display = "block";
+            return false;
+        } else {
+            document.getElementById("date_periority_error").style.display = "none";
+            return true;
+        }
+    }
+
+    function confirmation_delete() {
+        var result = confirm("از حذف بارنامه اطمینان دارید ؟");
+        if (result == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+</script>
+
+<script>
+
+    function check_National_Code() {
+        var code = document.getElementById("national_Code_Driver").value;
+        if (!cal_National_Code(code)) {
+            document.getElementById("cod_ntn_error").style.display = "block"
+        } else
+            document.getElementById("cod_ntn_error").style.display = "none";
+    }
+
+    function cal_National_Code(code) {
+
+        var L = code.length;
+
+        if (L < 8 || parseInt(code, 10) == 0) return false;
+        code = ('0000' + code).substr(L + 4 - 10);
+        if (parseInt(code.substr(3, 6), 10) == 0) return false;
+        var c = parseInt(code.substr(9, 1), 10);
+        var s = 0;
+        for (var i = 0; i < 9; i++)
+            s += parseInt(code.substr(i, 1), 10) * (10 - i);
+        s = s % 11;
+        return (s < 2 && c == s) || (s >= 2 && c == (11 - s));
+        return true;
+    }
+
+    function check_tel_Driver() {
+        var tel_Driver = document.getElementById("phone_Driver").value;
+        debugger;
+        // var arrMobile = getMobiles(tel_Driver);
+        if (tel_Driver.length != 11 || isNaN(tel_Driver)) {
+            scrollTop();
+            document.getElementById("tel_driver_error").style.display = "block";
+        } else
+            document.getElementById("tel_driver_error").style.display = "none";
+
+    }
+
+    function check_Cod_NTN_Sender() {
+
+        var code = document.getElementById("national_Identify_Sender").value;
+        if (!check_Shense_Meli(code)) {
+            document.getElementById("cod_cod_ntn_error").style.display = "block";
+            scrollTop();
+        } else
+            document.getElementById("cod_cod_ntn_error").style.display = "none";
+    }
+
+    function check_Cod_NTN_Reciever() {
+        debugger;
+        var code = document.getElementById("national_Identify_Receiver").value;
+        if (!check_Shense_Meli(code)) {
+            scrollTop();
+            document.getElementById("cod_cod_ntn_error").style.display = "block";
+
+        } else
+            document.getElementById("cod_cod_ntn_error").style.display = "none";
+    }
+
+    function check_Shense_Meli(code) {
+
+        var L = code.length;
+
+        if (L < 11 || parseInt(code, 10) == 0) return false;
+
+        if (parseInt(code.substr(3, 6), 10) == 0) return false;
+        var c = parseInt(code.substr(10, 1), 10);
+        var d = parseInt(code.substr(9, 1), 10) + 2;
+        var z = new Array(29, 27, 23, 19, 17);
+        var s = 0;
+        for (var i = 0; i < 10; i++)
+            s += (d + parseInt(code.substr(i, 1), 10)) * z[i % 5];
+        s = s % 11;
+        if (s == 10) s = 0;
+        return (c == s);
+
+    }
+
+    function check_Sender_Cod_post() {
+        var code = document.getElementById("post_Code_Sender").value;
+        check_Cod_Post(code);
+    }
+
+    function check_Reciever_Cod_Post() {
+        var code = document.getElementById("post_Code_Receiver").value;
+        check_Cod_Post(code);
+    }
+
+    function check_Cod_Post(code) {
+        debugger;
+        if (code.length != 10 || isNaN(code)) {
+            scrollTop();
+            document.getElementById("cod_post_error").style.display = "block";
+        } else
+            document.getElementById("cod_post_error").style.display = "none";
+    }
+
+    function prepareWebPage() {
+        debugger;
+        var specificElement = document.getElementsByClassName("input100");
+        for (var i = 0; i < specificElement.length; i++) {
+            var value = specificElement[i].value;
+            if (value.trim() != "") {
+                // specificElement[i].addClass('has-val');
+                specificElement[i].classList.add("has-val")
+            } else {
+                // specificElement[i].removeClass('has-val');
+                specificElement[i].classList.remove("has-val")
+            }
+        }
+    }
+
+
+</script>
+
+<script typeBar="text/javascript">
+    $('#date1').MdPersianDateTimePicker({
+        targetTextSelector: '#start_date',
+        // targetDateSelector: '#inputDate1-1',
+        dateFormat: 'yyyy-MM-dd',
+        isGregorian: false,
+        enableTimePicker: false,
+        disableBeforeToday: true,
+        disabledDates: [new Date(), new Date(2018, 9, 11), new Date(2018, 9, 12), new Date(2018, 9, 13),
+            new Date(2018, 9, 14)
+        ],
+        disabledDays: [5, 6]
+    });
+</script>
+
+<script typeBar="text/javascript">
+    $('#date2').MdPersianDateTimePicker({
+        targetTextSelector: '#finish_date',
+        // targetDateSelector: '#inputDate1-1',
+        dateFormat: 'yyyy-MM-dd',
+        isGregorian: false,
+        enableTimePicker: false,
+        disableBeforeToday: true,
+        disabledDates: [new Date(), new Date(2018, 9, 11), new Date(2018, 9, 12), new Date(2018, 9, 13),
+            new Date(2018, 9, 14)
+        ],
+        disabledDays: [5, 6]
+    });
+</script>
+
+<script>
+    function myFunction() {
+        alert("I am an alert box!");
+    }
+</script>
+
+<script>
+    function showInfoAlert() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            setTimeout(function () {
+
+            }, 20000);
+        }
+    }
+</script>
+
+<script>
+    function scrollTop() {
+        window.scrollTo(0, 0);
+    }
+</script>
+
+<script>
+    $('.input100').each(function () {
+        $(this).on('blur', function () {
+            if ($(this).val().trim() != "") {
+                $(this).addClass('has-val');
+            } else {
+                $(this).removeClass('has-val');
+            }
+        })
+    })
+
+    $('.input100').each(function () {
+        $(this).on('load', function () {
+            if ($(this).val().trim() != "") {
+                $(this).addClass('has-val');
+            } else {
+                $(this).removeClass('has-val');
+            }
+        })
+    })
+
+    $('.input100').each(function () {
+        $(this).on('ready', function () {
+            if ($(this).val().trim() != "") {
+                $(this).addClass('has-val');
+            } else {
+                $(this).removeClass('has-val');
+            }
+        })
+    })
+
+</script>
+
+</body>
+</html>

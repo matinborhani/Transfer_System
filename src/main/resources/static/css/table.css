@@ -1,0 +1,9 @@
+table{
+    border-collapse: separate;
+    border-spacing:10px;
+}
+.center{
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+}

@@ -1,0 +1,19 @@
+    // function calculateNationalCode (str) {
+    //     debugger;
+    //     var calculate = 0;
+    //     for (var i = 10 ; i>1 ; i--){
+    //         calculate += str.charAt(str.length - i ) * i ;
+    //     }
+    //     var remain =calculate%11;
+    //     if (remain<2)
+    //         if (remain == str.charAt(9))
+    //             return true;
+    //         else
+    //             return false;
+    //     else
+    //     if (remain + Number(str.charAt(9) == 11))
+    //         return true;
+    //     else
+    //         return false;
+    //     document.write(calculate);
+    // }

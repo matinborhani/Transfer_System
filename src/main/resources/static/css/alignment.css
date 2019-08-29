@@ -1,0 +1,75 @@
+.alignment-right{
+    text-align: right;
+}
+.alignment-center{
+    text-align: center;
+}
+@font-face {
+    font-family: My Font;
+    src: url(../fonts/BNazanin.ttf);
+}
+.font_text{
+    font-family: "My Font";
+    font-size: 26px;
+    font-weight: bold;
+}
+.margin-right{
+    margin-right: 20px;
+}
+.adjust-label{
+    margin-right: 20px;
+    margin-top: 5px;
+}
+.background-image{
+    background-image: url("/images/truck-header2.png");
+}
+.header-form{
+}
+
+.header-form{
+    background-color: #2f9eb5;
+}
+
+table{
+    border-collapse: collapse;
+}
+tr:nth-child(1){
+    border-bottom: solid thin;
+}
+
+th{
+    text-align: center;
+    font-family: "My Font";
+    font-size: 18px;
+}
+.danger{
+    color: red;
+}
+  /*for nav bar*/
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #2e6da4;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+}
+
+
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}

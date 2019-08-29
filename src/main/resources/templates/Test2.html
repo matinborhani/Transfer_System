@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta categoryName="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/alignment.css}" typeBar="text/css">
+    <link rel="stylesheet" th:href="@{/css/table.css}" typeBar="text/css">
+    <link rel="stylesheet" href="../static/css/table.css" typeBar="text/css">
+
+
+    <!--<link rel="stylesheet" href="../static/css/jquery.md.bootstrap.datetimepicker.style.css" typeBar="text/css">-->
+    <link rel="script" th:href="@{/js/jquery.md.bootstrap.datetimepicker.js}"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script typeBar="application/javascript" th:src="@{/js/jquery.md.bootstrap.datetimepicker.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/jquery.md.bootstrap.datetimepicker.style.css}" typeBar="text/css">
+</head>
+<body>
+
+
+<div class="alert alert-success" id="myDIV" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">اطلاعات با موفقیت ثبت شد</p>
+</div>
+
+<div class="alert alert-danger" id="weight_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">وزن را وارد کنید</p>
+</div>
+
+<div class="alert alert-danger" id="date_send_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">فرمت تاریخ ارسال را به درستی وارد کنید</p>
+</div>
+
+<div class="alert alert-danger" id="date_rec_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">فرمت تاریخ دریافت را به درستی وارد کنید</p>
+</div>
+
+<div class="alert alert-danger" id="date_periority_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">تاریخ ارسال بعد از دریافت وارد شده است</p>
+</div>
+
+<div class="alert alert-danger" id="cod_ntn_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">کد ملی صحیح نمی باشد</p>
+</div>
+
+<div class="alert alert-danger" id="tel_driver_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">شماره تلفن حاوی 11 عدد است</p>
+</div>
+
+<div class="alert alert-danger" id="cod_post_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">کد پستی حاوی 10 عدد است</p>
+</div>
+
+<div class="alert alert-danger" id="cod_cod_ntn_error" style="display: none;text-align: right" dir="rtl">
+    <p class="font_text">شناسه ملی اشتباه وارد شده است</p>
+</div>
+
+<script>
+    function validate() {
+        var resultWeight = checkWeight();
+        if (resultWeight) {
+            if (checkDateFormat()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    function checkWeight() {
+        var weightValue = document.forms["form"]["weight"].value;
+
+        if (isNaN(weightValue) || weightValue == "" || weightValue < 0) {
+            scrollTop();
+            document.getElementById("weight_error").style.display = "block";
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function checkDateFormat() {
+        // var sendDate = document.forms["form"]["sendDate"];
+        var sendDate = document.getElementById("start_date").value;
+        var partOneSend = sendDate.charAt(4);
+        var partTwoSend = sendDate.charAt(7);
+        if (partOneSend != "/" || partTwoSend != "/") {
+            document.getElementById("date_send_error").style.display = "block";
+            return false;
+        }
+        // for reciver
+        // var receivedDate = document.forms["form"]["receivedDate"].value;
+        var receivedDate = document.getElementById("finish_date").value;
+        var partOneReceiver = receivedDate.charAt(4);
+        var partTwoReceiver = receivedDate.charAt(7);
+        if (partOneReceiver != "/" || partTwoReceiver != "/") {
+            document.getElementById("date_rec_error").style.display = "block";
+            return false;
+        }
+        if (!check_value_date(sendDate, receivedDate))
+            return false;
+        return true
+    }
+
+    function parseArabic(str) {
+        return Number(str.replace(/[٠١٢٣٤٥٦٧٨٩]/g, function (d) {
+            return d.charCodeAt(0) - 1632; // Convert Arabic numbers
+        }).replace(/[۰۱۲۳۴۵۶۷۸۹]/g, function (d) {
+            return d.charCodeAt(0) - 1776; // Convert Persian numbers
+        }));
+    }
+
+    function check_value_date(sendDate, receivedDate) {
+        var arrSend = sendDate.split("/");
+        var arrReceived = receivedDate.split("/");
+        debugger;
+        for (var i = 0; i < arrSend.length; i++) {
+            arrSend[i] = parseArabic(arrSend[i]);
+            arrReceived[i] = parseArabic(arrReceived[i]);
+        }
+        if (arrSend[0] > arrReceived[0] ||
+            arrSend[1] > arrReceived[1] ||
+            arrSend[2] > arrReceived[2]) {
+            scrollTop();
+            document.getElementById("date_periority_error").style.display = "block";
+            return false;
+        }
+        return true;
+    }
+
+
+</script>
+
+<script>
+
+    function check_National_Code() {
+        var code = document.getElementById("national_Code_Driver").value;
+        if (!cal_National_Code(code)) {
+            document.getElementById("cod_ntn_error").style.display = "block"
+        } else
+            document.getElementById("cod_ntn_error").style.display = "none";
+    }
+
+    function cal_National_Code(code) {
+
+        var L = code.length;
+
+        if (L < 8 || parseInt(code, 10) == 0) return false;
+        code = ('0000' + code).substr(L + 4 - 10);
+        if (parseInt(code.substr(3, 6), 10) == 0) return false;
+        var c = parseInt(code.substr(9, 1), 10);
+        var s = 0;
+        for (var i = 0; i < 9; i++)
+            s += parseInt(code.substr(i, 1), 10) * (10 - i);
+        s = s % 11;
+        return (s < 2 && c == s) || (s >= 2 && c == (11 - s));
+        return true;
+    }
+
+    function check_tel_Driver() {
+        var tel_Driver = document.getElementById("phone_Driver").value;
+        debugger;
+        // var arrMobile = getMobiles(tel_Driver);
+        if (tel_Driver.length != 11 || isNaN(tel_Driver)) {
+            scrollTop();
+            document.getElementById("tel_driver_error").style.display = "block";
+        } else
+            document.getElementById("tel_driver_error").style.display = "none";
+
+    }
+
+    function check_Cod_NTN_Sender() {
+
+        var code = document.getElementById("national_Identify_Sender").value;
+        if (!check_Shense_Meli(code)) {
+            document.getElementById("cod_cod_ntn_error").style.display = "block";
+            scrollTop();
+        } else
+            document.getElementById("cod_cod_ntn_error").style.display = "none";
+    }
+
+    function check_Cod_NTN_Reciever() {
+        debugger;
+        var code = document.getElementById("national_Identify_Receiver").value;
+        if (!check_Shense_Meli(code)) {
+            scrollTop();
+            document.getElementById("cod_cod_ntn_error").style.display = "block";
+
+        } else
+            document.getElementById("cod_cod_ntn_error").style.display = "none";
+    }
+
+    function check_Shense_Meli(code) {
+
+        var L = code.length;
+
+        if (L < 11 || parseInt(code, 10) == 0) return false;
+
+        if (parseInt(code.substr(3, 6), 10) == 0) return false;
+        var c = parseInt(code.substr(10, 1), 10);
+        var d = parseInt(code.substr(9, 1), 10) + 2;
+        var z = new Array(29, 27, 23, 19, 17);
+        var s = 0;
+        for (var i = 0; i < 10; i++)
+            s += (d + parseInt(code.substr(i, 1), 10)) * z[i % 5];
+        s = s % 11;
+        if (s == 10) s = 0;
+        return (c == s);
+
+    }
+
+    function check_Sender_Cod_post() {
+        var code = document.getElementById("post_Code_Sender").value;
+        check_Cod_Post(code);
+    }
+
+    function check_Reciever_Cod_Post() {
+        var code = document.getElementById("post_Code_Receiver").value;
+        check_Cod_Post(code);
+    }
+
+    function check_Cod_Post(code) {
+        debugger;
+        if (code.length != 10 || isNaN(code)) {
+            scrollTop();
+            document.getElementById("cod_post_error").style.display = "block";
+        } else
+            document.getElementById("cod_post_error").style.display = "none";
+    }
+
+
+</script>
+
+<script>
+
+
+</script>
+<nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="home.html"><img src="../static/images/logo.png"></a>
+    <a href="/home"><img src="/images/logo.png"></a>
+    <a href="/home" class="navbar-brand js-scroll-trigger">خانه</a>
+</nav>
+
+<div>
+
+</div>
+
+<form dir="rtl" class="center font_text" style="padding: 10px;" name="form"
+      action="#" th:action="@{/addwaybil}" th:object="${waybil}" method="post" onsubmit="return validate();">
+    <table dir="rtl " class="thead-light was-validated ">
+        <div class="container" dir="rtl">
+            <tr>
+                <td>
+                    <label for="date_created" style="margin-right: 20px;margin-top: 5px;float: right">تاریخ ثبت
+                        :</label>
+                </td>
+                <td>
+                    <label id="date_created" th:field="*{sCreateDate}" class="form-control"
+                           style="text-align: center"></label>
+                </td>
+                <td><b><h2>ایجاد بارنامه</h2></b></td>
+                <td></td>
+                <td>
+                    <label for="status2" style="margin-right: 20px;margin-top: 5px;float: right">وضعیت بارنامه :</label>
+                </td>
+                <td>
+                    <label id="status2" th:field="*{status}" th:value="${'02'}" class="form-control"
+                           style="text-align: center">در حال تکمیل</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="start_Date" style="float: right"> تاریخ ارسال :</label>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-addon cursor-pointer" id="date1"><img src="/images/calender.png"></img></span>
+                        <input typeBar="text" name="sendDate" id="start_date" th:field="*{sStartDate}"
+                               class="form-control" placeholder="تاریخ ارسال بارنامه" categoryName="start_date"
+                               aria-label="date1" aria-describedby="date1" onblur="check_value_date()"
+                               required="required">
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+
+
+                </td>
+
+                <td th:if="${#fields.hasErrors('sendDate')}" th:errors="*{sendDate}" th:onclick="'alert();'">خطای
+                    تاریخ
+                </td>
+
+                <td>
+                    <label for="finish_date" style="margin-right: 20px;margin-top: 5px;float: right"> تاریخ دریافت
+                        :</label>
+                </td>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-addon cursor-pointer" id="date2"><img src="/images/calender.png"></img></span>
+                        <input typeBar="text" name="receivedDate" id="finish_date" th:field="*{sFinishDate}"
+                               class="form-control " placeholder="تاریخ دریافت بارنامه " categoryName="finish_date"
+                               aria-label="date2" aria-describedby="date2" required="required">
+                        <!--<img th:src="@{/images/calender.png}" src="../static/images/calender.png" width="20">-->
+                    </div>
+                </td>
+                <td>
+                    <label for="typeBar" style="margin-right: 20px;float: right"> نوع بار :</label>
+                </td>
+                <td>
+                    <select id="typeBar" th:field="*{typeBar}" class="form-control">
+                        <option value="">--</option>
+                        <option th:each="ValueLookup : ${list_lookup}"
+                                th:value="${ValueLookup.lookupIdentify.valueLookUP}"
+                                th:text="${ValueLookup.desFarsi}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="weight2" style="margin-top: 5px;float: right">وزن بار :</label>
+                </td>
+                <td>
+                    <input type="number" name="weight" th:field="*{weight}" class="form-control" id="weight2"
+                           placeholder="وزن بار به تن وارد کنید" max="10000000">
+                </td>
+                <td th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}">خطای تاریخ</td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="cost_transfer" style="margin-top: 5px;float: right">هزینه حمل :</label>
+                </td>
+                <td>
+                    <input type="number" th:field="*{costTransfer}" class="form-control" id="cost_transfer"
+                           placeholder="هزینه حمل  وارد کنید" categoryName="weight">
+                </td>
+                <td>
+                    <label for="cost_insurance" style="margin-right: 20px;margin-top: 5px;float: right">هزینه بیمه
+                        :</label>
+                </td>
+                <td>
+                    <input type="number" th:field="*{costInsurance}" class="form-control" id="cost_insurance"
+                           placeholder="هزینه بیمه را وارد کنید" categoryName="weight" max="8">
+                </td>
+                <td>
+                    <label for="cost_Weighbridge" style="margin-right: 20px;float: right">هزینه باسکول :</label>
+                </td>
+                <td>
+                    <input type="number" th:field="*{costWeightBridge}" class="form-control" id="cost_Weighbridge"
+                           placeholder="هزینه باسکول وارد کنید " categoryName="price" max="8">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="national_Code_Driver" style="margin-top: 5px;float: right;">کد ملی راننده :</label>
+                </td>
+                <td>
+                    <input type="number" th:field="*{driverNationalCode}" class="form-control" id="national_Code_Driver"
+                           placeholder="کد ملی راننده وارد کنید " maxlength="10" required="required" minlength="10"
+                           onblur="return check_National_Code()">
+                </td>
+                <td>
+                    <label for="name_Driver" style="margin-right: 20px;margin-top: 5px;float: right">نام راننده
+                        :</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{driverName}" class="form-control" id="name_Driver"
+                           placeholder="نام راننده را وارد کنید " maxlength="25" required="required">
+                </td>
+                <td>
+                    <label for="phone_Driver" style="margin-right: 20px; margin-top: 5px;float: right">تلفن راننده
+                        :</label>
+                </td>
+                <td>
+                    <input type="number" th:field="*{driverPhone}" class="form-control" id="phone_Driver"
+                           placeholder="تلفن راننده را وارد کنید " categoryName="price" maxlength="12"
+                           require="required" onblur="check_tel_Driver()">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="number_Lics_Driver" style="margin-top: 5px;float: right">شماره گواهینامه</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{driverLicsDriving}" class="form-control" id="number_Lics_Driver"
+                           placeholder="شماره گواهینامه راننده را وارد کنید " categoryName="price" maxlength="12">
+                </td>
+                <td>
+                    <label for="kind_Auto" style="margin-right: 20px;margin-top: 5px;float: right">نوع ماشین</label>
+                </td>
+                <td>
+                    <select id="kind_Auto" th:field="*{carKind}" class="form-control">
+                        <option value="">--</option>
+                        <option th:each="ValueLookup : ${list_cars}"
+                                th:value="${ValueLookup.lookupIdentify.valueLookUP}"
+                                th:text="${ValueLookup.desFarsi}">
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <!--pelak mashine-->
+                    <label for="car_Tag_Auto" th:field="*{carTag}" style="float: right ; margin-right: 20px">پلاک
+                        ماشین</label>
+                </td>
+                <td>
+                    <div class="input-group" dir="ltr">
+                        <input th:field="*{firstPart_carTag}" type="number" class="form-control" id="car_Tag_Auto"
+                               style="width: 40px;text-align: center" min="10" max="99">
+                        <label th:field="*{letterPart_carTag}" class="form-control"
+                               style="width: 50px;text-align: center">ع</label>
+                        <input th:field="*{secondPart_carTag}" type="number" class="form-control"
+                               style="width: 45px;text-align: center" min="100" max="999">
+                    </div>
+                    <input th:field="*{lastPart_carTag}" type="number" class="form-control" style="text-align: center"
+                           placeholder="ایران 13" min="10" max="99">
+                </td>
+                <td>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="name_Sender" style="float: right">نام فرستنده :</label>
+                </td>
+                <td>
+                    <input type="text" class="form-control" th:field="*{senderName}" id="name_sender"
+                           placeholder="نام فرستنده را وارد کنید " maxlength="25">
+                </td>
+                <td>
+                    <label for="national_Code_Sender" style="margin-right: 20px;margin-top: 5px;float: right">کد ملی
+                        فرستنده:</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{senderNationalCode}" class="form-control" id="national_Code_Sender"
+                           placeholder="شماره ملی فرستنده وارد کنید " maxlength="20">
+                </td>
+                <td>
+                    <label for="national_Identify_Sender" style="margin-right: 20px;margin-top: 5px;float: right">شناسه
+                        ملی فرستنده :</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{senderIdentifyCode}" class="form-control"
+                           id="national_Identify_Sender" placeholder="شناسه ملی فرستنده را وارد کنید " maxlength="20"
+                           onblur="check_Cod_NTN_Sender()">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="phone_Sender" style="float: right">تلفن فرستنده :</label>
+                </td>
+                <td>
+                    <input type="number" th:field="*{senderPhone}" class="form-control" id="phone_Sender"
+                           placeholder="تلفن فرستنده وارد کنید " maxlength="12">
+                </td>
+                <td>
+                    <label for="post_Code_Sender" style="margin-right: 20px;margin-top: 5px;float: right">کد پستی
+                        فرستنده :</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{senderPostCode}" class="form-control" id="post_Code_Sender"
+                           placeholder="کد پستی فرستنده وارد کنید " categoryName="price" maxlength="20"
+                           onblur="check_Sender_Cod_post()">
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label for="name_Reciever" style="float: right;">نام گیرنده :</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{receiverName}" class="form-control" id="name_Reciever"
+                           placeholder="نام گیرنده را وارد کنید " maxlength="25">
+                </td>
+                <td>
+                    <label for="national_Code_Receiver" style="margin-right: 20px;margin-top: 5px;float: right">کد ملی
+                        گیرنده :</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{receiverNationalCode}" class="form-control"
+                           id="national_Code_Receiver" placeholder="شماره ملی گیرنده را وارد کنید " maxlength="20">
+                </td>
+                <td>
+                    <label for="national_Identify_Receiver" style="margin-right: 20px;margin-top: 5px;float: right">شناسه
+                        ملی گیرنده :</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{receiverIdentifyCode}" class="form-control"
+                           id="national_Identify_Receiver" placeholder="شناسه ملی گیرنده را وارد کنید "
+                           categoryName="price" maxlength="20" onblur="check_Cod_NTN_Reciever()">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="phone_Receiver" style="float: right">تلفن گیرنده</label>
+                </td>
+                <td>
+                    <input type="number" th:field="*{receiverPhone}" class="form-control" id="phone_Receiver"
+                           placeholder="تلفن گیرنده را وارد کنید " maxlength="12">
+                </td>
+                <td>
+                    <label for="post_Code_Receiver" style="margin-right: 20px;margin-top: 5px;float: right">کد پستی
+                        گیرنده</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{receiverPostCode}" class="form-control" id="post_Code_Receiver"
+                           placeholder="کد پستی گیرنده را وارد کنید " maxlength="20" onblur="check_Reciever_Cod_Post()">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" th:field="*{des}" class="form-control "
+                           placeholder="توضیحات اضافی در مورد بارنامه را وارد کنید "
+                           style="font-size: large;width:max-content " maxlength="100">
+                </td>
+                <td>
+                    <!-- Modal -->
+                    <input class="btn btn-primary" type="submit" value="Submit">ثبت بارنامه</input>
+                </td>
+                <td>
+                    <!-- Modal -->
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" type="reset">بارنامه
+                        جدید
+                    </button>
+                </td>
+            </tr>
+        </div>
+    </table>
+</form>
+
+
+<!--</div>-->
+
+<!--<script src="/js/jquery.md.bootstrap.datetimepicker.js" typeBar="text/javascript"></script>-->
+
+
+<!--<script src="../static/js/jquery.md.bootstrap.datetimepicker.js" typeBar="text/javascript"></script>-->
+
+<script typeBar="text/javascript">
+    $('#date1').MdPersianDateTimePicker({
+        targetTextSelector: '#start_date',
+        // targetDateSelector: '#inputDate1-1',
+        dateFormat: 'yyyy-MM-dd',
+        isGregorian: false,
+        enableTimePicker: false,
+        disableBeforeToday: true,
+        disabledDates: [new Date(), new Date(2018, 9, 11), new Date(2018, 9, 12), new Date(2018, 9, 13),
+            new Date(2018, 9, 14)
+        ],
+        disabledDays: [5, 6]
+    });
+</script>
+
+<script typeBar="text/javascript">
+    $('#date2').MdPersianDateTimePicker({
+        targetTextSelector: '#finish_date',
+        // targetDateSelector: '#inputDate1-1',
+        dateFormat: 'yyyy-MM-dd',
+        isGregorian: false,
+        enableTimePicker: false,
+        disableBeforeToday: true,
+        disabledDates: [new Date(), new Date(2018, 9, 11), new Date(2018, 9, 12), new Date(2018, 9, 13),
+            new Date(2018, 9, 14)
+        ],
+        disabledDays: [5, 6]
+    });
+</script>
+
+<script>
+    function myFunction() {
+        alert("I am an alert box!");
+    }
+</script>
+<script>
+    function showInfoAlert() {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            setTimeout(function () {
+
+            }, 20000);
+        }
+    }
+</script>
+<script>
+    function scrollTop() {
+        window.scrollTo(0, 0);
+    }
+</script>
+</body>
+</html>
