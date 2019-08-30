@@ -67,6 +67,23 @@ th{
     display: block;
 }
 
+.sidenav-small{
+    height: 100%;
+    width: 50px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #2e6da4;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+.sidenav-small a {
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+}
 
 .main {
     margin-left: 160px; /* Same as the width of the sidenav */
