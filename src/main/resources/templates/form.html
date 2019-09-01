@@ -43,9 +43,13 @@
     <script type="application/javascript" th:src="@{/js/validate.js}"></script>
 
 </head>
-<body>
+<body onload="prepareWebPage()">
 
-
+<script>
+    var message = "[[${message}]]";
+    if (message != "")
+        alert(message);
+</script>
 <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light background-image">
 
     <a href="/home"><img src="/images/logo.png"></a>
@@ -209,7 +213,7 @@
                         <span class="focus-input100" data-placeholder="شناسه ملی فرستنده"></span>
                     </div>
                     <small id="hint_NTN_Sender" class="form-text text-danger"
-                           style="display:block;font-size: medium;text-align: right;margin-right: 60px" dir="rtl">
+                           style="display:block;font-size: medium;text-align: right;margin-right: 60px;margin-top: -25px" dir="rtl">
 
                     </small>
                 </td>
@@ -222,7 +226,7 @@
                         <span class="focus-input100" data-placeholder="تلفن فرستنده"></span>
                     </div>
                     <small id="hint_tel_Sender" class="form-text text-danger"
-                           style="display:block;font-size: medium;text-align: right;margin-right: 100px" dir="rtl">
+                           style="display:block;font-size: medium;text-align: right;margin-right: 100px;margin-top: -25px" dir="rtl">
 
                     </small>
                 </td>
@@ -236,7 +240,7 @@
                         <span class="focus-input100 text-success" data-placeholder="کد پستی فرستنده "></span>
                     </div>
                     <small id="hint_Code_Post_Sender" class="form-text text-danger"
-                           style="display:block;font-size: medium;text-align: right;margin-right: 140px" dir="rtl">
+                           style="display:block;font-size: medium;text-align: right;margin-right: 140px;margin-top: -25px" dir="rtl">
 
                     </small>
                 </td>
@@ -260,7 +264,7 @@
                         <span class="focus-input100" data-placeholder="شناسه ملی گیرنده"></span>
                     </div>
                     <small id="hint_NTN_Receiver" class="form-text text-danger"
-                           style="display:block;font-size: medium;text-align: right;margin-right: 60px" dir="rtl">
+                           style="display:block;font-size: medium;text-align: right;margin-right: 60px;margin-top: -10px" dir="rtl">
 
                     </small>
                 </td>
@@ -382,6 +386,21 @@
             setTimeout(function () {
 
             }, 20000);
+        }
+    }
+
+    function prepareWebPage() {
+        debugger;
+        var specificElement = document.getElementsByClassName("input100");
+        for (var i = 0; i < specificElement.length; i++) {
+            var value = specificElement[i].value;
+            if (value.trim() != "") {
+                // specificElement[i].addClass('has-val');
+                specificElement[i].classList.add("has-val")
+            } else {
+                // specificElement[i].removeClass('has-val');
+                specificElement[i].classList.remove("has-val")
+            }
         }
     }
 </script>

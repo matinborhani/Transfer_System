@@ -79,6 +79,7 @@ public class SimpleController {
             return "update_form.html";
         } else {
             model.addAttribute("waybil", new WayBil());
+            model.addAttribute("message","با موفقیت ویرایش شد");
             return "home.html";
         }
     }
@@ -100,12 +101,14 @@ public class SimpleController {
         boolean result = wayBilService.insertWayBil(wayBil);
         if (result == true) {
             model.addAttribute("waybil", new WayBil());
+            model.addAttribute("message","با موفقیت ثبت شد");
             return "home.html";
         } else {
             model.addAttribute("waybil", wayBil);
             model.addAttribute("list_lookup", lookupService.getGoodsLookup());
             model.addAttribute("list_status", lookupService.getStatusLookup());
             model.addAttribute("list_cars", lookupService.getCarsLookup());
+            model.addAttribute("message","شناسه ملی راننده تکراری است");
             return "form.html";
         }
     }
@@ -117,6 +120,7 @@ public class SimpleController {
         wayBil.setId(wayBil_Reload.getId());
         wayBilService.deleteWayBil(wayBil);
         model.addAttribute("waybil", new WayBil());
+        model.addAttribute("message","با موفقیت حذف شد");
         return "home.html";
     }
 

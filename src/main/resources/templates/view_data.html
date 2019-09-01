@@ -20,8 +20,8 @@
 </nav>
 <div class="table-bordered">
     <table dir="rtl" class="table">
-        <div dir="rtl">
-            <label class="label-default font_text">پایش اطلاعات</label>
+        <div dir="rtl" class="bg-success" style="text-align: center">
+            <label class="font_text" >فیلتر اطلاعات</label>
             <span><img src="/images/filter2.png"></span>
         </div>
         <tr>
@@ -96,6 +96,60 @@
         var driverName = document.getElementById("driverInput").value;
         var sendName = document.getElementById("sendInput").value;
         var receivedName = document.getElementById("receiverInput").value;
+        if (driverName != "" && sendName != "" ||
+            driverName != "" && receivedName != "" ||
+            sendName != "" && receivedName != "")
+            searchWayBilTwoElement();
+        var textSearch;
+        var idxSearch;
+        var textTable;
+        var rowTable
+        if (sendName != "") {
+            textSearch = sendName;
+            idxSearch = 6;
+        }
+        else if (driverName != "") {
+            textSearch = driverName;
+            idxSearch = 5;
+        }
+        else if (receivedName != "") {
+            textSearch = receivedName;
+            idxSearch = 7;
+        }
+        else{
+            var table = document.getElementById("table");
+            var tr = table.getElementsByTagName("tr");
+            for (var i = 1 ; i<tr.length ; i++){
+                tr[i].style.display="";
+            }
+        }
+
+        //     driverName = "-1";
+        // if (sendName == "")
+        //     sendName = "-1";
+        // if (receivedName == "-1")
+        //     receivedName = "-1";
+        var table = document.getElementById("table");
+        var tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            rowTable = tr[i].getElementsByTagName("td")[idxSearch];
+            if (rowTable) {
+                textTable = rowTable.textContent || rowTable.innerText;
+                if (textTable == "")
+                    textTable = "-1";
+                if (textTable.indexOf(textSearch) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+    function searchWayBilTwoElement() {
+        var driverName = document.getElementById("driverInput").value;
+        var sendName = document.getElementById("sendInput").value;
+        var receivedName = document.getElementById("receiverInput").value;
         var table = document.getElementById("table");
         var tr = table.getElementsByTagName("tr");
         var td_Driver;
@@ -110,13 +164,16 @@
                 text_Driver = td_Driver.textContent || td_Driver.innerText;
                 text_Sender = td_Sender.textContent || td_Sender.innerText;
                 text_Receiver = td_Receiver.textContent || td_Receiver.innerText;
-                if (text_Driver.indexOf(driverName) > -1) {
+                if (text_Driver.indexOf(driverName) > -1 &&
+                    text_Sender.indexOf(sendName)> -1 &&
+                    text_Receiver.indexOf(receivedName)>-1) {
                     tr[i].style.display = "";
                 } else {
                     tr[i].style.display = "none";
                 }
             }
         }
+
     }
 </script>
 </body>

@@ -133,6 +133,19 @@
             }
         }
     </script>
+    <script>
+        var message = "[[${message}]]";
+        // if (message != "" && message == null) {
+        //     document.getElementById("result").style.display="block";
+        //     document.getElementById("result").innerText = message;
+        //     document.getElementById("result").innerHTML = message;
+        // }
+        if (message != "")
+            alert(message);
+    </script>
+    <div id="result" class="bg-success text-white font_text" style="display: none;">
+
+    </div>
     <div class="huge-title centered">
 
         <div class="logo-phone centered"><img alt="YOURLOGO" src="img/logo-phone.png"></div>
