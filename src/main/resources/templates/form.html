@@ -64,17 +64,19 @@
         <div class="container" dir="rtl">
             <tr style="background-color: #2f9eb5">
                 <td>
-                    <label for="date_created" style="margin-right: 20px;margin-top: 5px;float: right">تاریخ ثبت
+                    <label class="text-white" for="date_created" style="margin-right: 20px;margin-top: 5px;float: right">تاریخ ثبت
                         :</label>
                     <label id="date_created" th:field="*{sCreateDate}" class="form-control"
-                           style="text-align: center;width:120px;margin-top: 5px;margin-right: 140px"></label>
+                           style="text-align: center;width:120px;margin-top: 5px;margin-right: 140px">
+                        98/06/10
+                    </label>
                 </td>
-                <td><b><h2 class="font_text">ایجاد بارنامه</h2></b></td>
+                <td><b><h2 class="font_text text-white">ایجاد بارنامه</h2></b></td>
                 <td></td>
                 <td>
                     <!--<label for="status2" style="margin-top: 5px;float: right;margin-left: 180px">وضعیت بارنامه :</label>-->
                     <label id="status2" th:field="*{status}" th:value="${'02'}" class="form-control"
-                           style="text-align: center;margin-top: 5px;width: fit-content">در حال تکمیل</label>
+                           style="text-align: center;margin-top: 5px;width: fit-content;margin-right: 150px">در حال تکمیل</label>
                 </td>
             </tr>
             <tr>
@@ -199,7 +201,7 @@
                 <td>
                     <div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-top: 16px">
                         <input class="input100" type="text" name="weight" th:field="*{senderName}" id="name_sender"
-                               maxlength="25">
+                               maxlength="25" required="required">
                         <span class="focus-input100" data-placeholder="نام فرستنده"></span>
                     </div>
                 </td>
@@ -251,7 +253,7 @@
                 <td>
                     <div class="wrap-input100 alignment-right input-group" dir="rtl">
                         <input class="input100" type="text" name="weight" th:field="*{receiverName}" id="name_Reciever"
-                               maxlength="25">
+                               maxlength="25" required="required">
                         <span class="focus-input100" data-placeholder="نام گیرنده"></span>
                     </div>
                 </td>
@@ -307,34 +309,37 @@
                 </td>
                 <td>
                     <!--pelak mashine-->
-                    <label for="car_Tag_Auto" th:field="*{carTag}" style="float: right ; margin-right: 20px">پلاک
+                    <label for="car_Tag_Auto" th:field="*{carTag}" style="float: right ; margin-right: 60px">پلاک
                         ماشین</label>
-                </td>
-                <td>
-                    <div class="input-group" dir="ltr">
-                        <input th:field="*{firstPart_carTag}" type="number" class="form-control" id="car_Tag_Auto"
-                               style="width: 40px;text-align: center" min="10" max="99">
-                        <label th:field="*{letterPart_carTag}" class="form-control"
-                               style="width: 10px;text-align: center">ع</label>
-                        <input th:field="*{secondPart_carTag}" type="number" class="form-control"
+                    <div class="input-group" dir="ltr" style="margin-right: 80px">
+                        <input th:field="*{firstPart_carTag}" type="number" class="input-group-text" id="car_Tag_Auto"
+                               style="width: 60px;text-align: center" min="10" max="99">
+                        <label th:field="*{letterPart_carTag}" class="input-group-text"
+                               style="width: 20px;text-align: center">ع</label>
+                        <input th:field="*{secondPart_carTag}" type="number" class="form-control input-group-text"
                                style="width: 45px;text-align: center" min="100" max="999">
-                        <input th:field="*{lastPart_carTag}" type="number" class="form-control"
+                        <input th:field="*{lastPart_carTag}" type="number" class="form-control input-group-text"
                                style="text-align: center" placeholder="ایران 13" min="10" max="99">
                     </div>
-
                 </td>
+
                 <td>
 
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="text" th:field="*{des}" placeholder="توضیحات اضافی در مورد بارنامه را وارد کنید "
-                           style="font-size: large;width:max-content;margin-top: 20px" maxlength="100">
+                    <!-- Modal -->
+
                 </td>
                 <td>
-                    <!-- Modal -->
-                    <input class="btn btn-primary" type="submit" value="ثبت بارنامه" style="margin-top: 20px"></input>
+
+                </td>
+                <td>
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" value="ثبت بارنامه"  style="margin-top: 20px;margin-right: 100px"></input>
+                </td>
+                <td>
+                    <a href="/home" class="btn btn-secondary font_text" style="margin-top: 20px">بازگشت به صفحه اصلی</a>
                 </td>
             </tr>
         </div>
