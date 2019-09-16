@@ -9,14 +9,15 @@
 
     <link rel="stylesheet" th:href="@{/css/alignment.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/table.css}" typeBar="text/css">
-    <link rel="stylesheet" href="../static/css/table.css" typeBar="text/css">
+    <link rel="stylesheet" href="../../static/css/table.css" typeBar="text/css">
 
     <!--for animate input-->
     <link rel="stylesheet" th:href="@{/css/main.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/upform.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/uputil.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
-    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+    <link rel="stylesheet" th:href="@{/css/dropdown_menu.css}" typeBar="text/css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -81,10 +82,37 @@
     <p class="font_text">شناسه ملی اشتباه وارد شده است</p>
 </div>
 
-
+<!--Header-->
 <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light background-image">
-
     <a href="/home"><img src="/images/logo.png"></a>
+    <div class="dropdown font_bnazanin">
+        <a class="dropbtn" style="font-size: larger">سرویس بارنامه</a>
+        <div class="dropdown-content">
+            <a href="/addwaybil">ثبت بارنامه</a>
+            <a href="/home">ویرایش بارنامه</a>
+            <a href="/getwaybils">مشاهده بارنامه ها</a>
+        </div>
+    </div>
+
+    <div class="dropdown font_bnazanin">
+        <a class="dropbtn" style="font-size: larger">سرویس راننده</a>
+        <div class="dropdown-content">
+            <a href="/get-driver">ویرایش راننده</a>
+            <a href="/drivers">مشاهده رانندگان</a>
+        </div>
+    </div>
+
+    <div class="dropdown font_bnazanin">
+        <a class="dropbtn" style="font-size: larger">سرویس معادن</a>
+        <div class="dropdown-content">
+            <a href="/get-mine">ویرایش معدن</a>
+            <a href="/mines">مشاهده معادن</a>
+        </div>
+    </div>
+
+
+
+
 </nav>
 
 <div>
@@ -120,14 +148,6 @@
                                                                                        style="margin-top: -5px"></span>
                     </div>
 
-                    <!--<div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-top: 10px">-->
-                    <!--<input class="input100" type="text" name="sendDate" th:field="*{sStartDate}" id="start_date"-->
-                    <!--required="required" categoryName="start_date" max="10000000" onblur="check_value_date()">-->
-                    <!--<span class="focus-input100" data-placeholder="تاریخ ارسال"></span>-->
-                    <!--</div>-->
-                    <!--<div class="input-group" >-->
-                    <!--<span class="input-group-addon cursor-pointer" id="date1"><img src="/images/calender.png"></span>-->
-                    <!--</div>-->
                 </td>
                 <td>
 
@@ -351,7 +371,7 @@
 
 
 <script>
-    function validate() {
+    function validate_WayBil() {
         var resultWeight = checkWeight();
         if (resultWeight) {
             if (checkDateFormat()) {

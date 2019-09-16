@@ -3,7 +3,7 @@
 <head>
     <link rel="icon" type="image/png" href="images/logo.png"/>
     <meta charset="UTF-8">
-    <title>راننده ها</title>
+    <title>معادن</title>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -56,13 +56,13 @@
         <tr>
             <td>
                 <input class="input-group font_bnazanin font_size_medium" style="padding-right: 5px;margin-right: 20px"
-                       id="nameDriver" placeholder="نام راننده :"
+                       id="nameMine" placeholder="نام معدن :"
                        onkeyup="searchWayBil()" >
             </td>
 
             <td>
                 <input class="input-group font_bnazanin font_size_medium" style="padding-right: 5px"
-                       id="ntnCodeDriver" placeholder="کد ملی :" type="number"
+                       id="ntnCodeMine" placeholder="شناسه ملی :" type="number"
                        onkeyup="searchWayBil()">
             </td>
 
@@ -74,27 +74,27 @@
     </table>
 </div>
 <div>
-    <table class="table table-bordered table-striped" dir="rtl" id="table">
-        <caption class="font_text" style="background-color: #a5b5ae;color: #FFFFFF;text-align: center">مشخصات رانندگان</caption>
-        <thead class="thead-light font_text"  dir="rtl">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">نام نام خانوادگی</th>
-                <th scope="col">شماره ملی</th>
-                <th scope="col">شماره تلفن</th>
-                <th scope="col">نشانی</th>
-                <th scope="col">شماره گواهینامه</th>
-            </tr>
+    <table class="table table-bordered table-striped" dir="rtl"  id="table">
+        <caption class="font_text" style="background-color:#b4670c ;color: #FFFFFF;text-align: center">مشخصات معادن</caption>
+        <thead class="thead-light font_text"  dir="rtl" >
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">اسم</th>
+            <th scope="col">شناسه ملی</th>
+            <th scope="col">کد پستی</th>
+            <th scope="col">شماره تلفن</th>
+            <th scope="col">آدرس</th>
+        </tr>
         </thead>
-        <tr th:each="driver:${drivers}">
+        <tr th:each="mine:${mines}">
             <td >
                 <label onload="getValueOfNumber()" class="table-row"/>
             </td>
-            <td th:text="${driver.namDrv}"/>
-            <td th:text="${driver.codNtnDrv}"/>
-            <td th:text="${driver.numTelDrv}"/>
-            <td th:text="${driver.addrHomeDrv}"/>
-            <td th:text="${driver.numLicsDrv}"/>
+            <td th:text="${mine.namMine}"/>
+            <td th:text="${mine.codNtnMine}"/>
+            <td th:text="${mine.codPostMine}"/>
+            <td th:text="${mine.numTelMine}"/>
+            <td th:text="${mine.addr}"/>
         </tr>
     </table>
 </div>
@@ -110,10 +110,10 @@
     // check condition and if one field fill search in
     function searchWayBil() {
         // get values
-        var nameDriver = document.getElementById("nameDriver").value;
-        var ntnCode = document.getElementById("ntnCodeDriver").value;
+        var nameMine = document.getElementById("nameMine").value;
+        var ntnCode = document.getElementById("ntnCodeMine").value;
         // if two field fill by value go to searchWayBilTwoElement
-        if (nameDriver != "" && ntnCode != ""){
+        if (nameMine != "" && ntnCode != ""){
             searchWayBilTwoElement();
             return;
         }
@@ -123,8 +123,8 @@
         var idxSearch;
         var textTable;
         var rowTable
-        if (nameDriver != "") {
-            textSearch = nameDriver;
+        if (nameMine != "") {
+            textSearch = nameMine;
             idxSearch = 1;
         }
         else if (ntnCode != "") {
@@ -159,8 +159,8 @@
     }
 
     function searchWayBilTwoElement() {
-        var name = document.getElementById("nameDriver").value;
-        var ntnCode = document.getElementById("ntnCodeDriver").value;
+        var name = document.getElementById("nameMine").value;
+        var ntnCode = document.getElementById("ntnCodeMine").value;
         var table = document.getElementById("table");
         var tr = table.getElementsByTagName("tr");
         var td_Name;
@@ -185,8 +185,8 @@
 
     // clear all filters
     function delete_Filters() {
-        document.getElementById("nameDriver").value = "";
-        document.getElementById("ntnCodeDriver").value= "";
+        document.getElementById("nameMine").value = "";
+        document.getElementById("ntnCodeMine").value= "";
         searchWayBil();
     }
 </script>

@@ -1,6 +1,4 @@
-// when user click by name
 function clickByName() {
-
     var byName=document.getElementById("byName");
     var byId=document.getElementById("byId");
     if (byId.checked == true) {
@@ -10,8 +8,7 @@ function clickByName() {
     }
 }
 
-// when user click by id
-function clickById() {
+function clickByNational() {
     var byName=document.getElementById("byName");
     var byId=document.getElementById("byId");
     if (byName.checked == true) {

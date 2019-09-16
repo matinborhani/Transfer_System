@@ -8,10 +8,23 @@
     font-family: My Font;
     src: url(../fonts/BNazanin.ttf);
 }
+@font-face {
+    font-family: b zar;
+    src: url("../fonts/B Zar.ttf");
+}
 .font_text{
     font-family: "My Font";
     font-size: 26px;
     font-weight: bold;
+}
+.font_bnazanin{
+    font-family: "My Font";
+}
+.font_size_medium{
+    font-size: large;
+}
+.font_bzar{
+    font-family: "b zar";
 }
 .margin-right{
     margin-right: 20px;

@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.DriverService;
 import com.example.demo.dao.LookupService;
 import com.example.demo.dao.WayBilService;
+import com.example.demo.entity.Driver;
 import com.example.demo.entity.WayBil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +20,7 @@ import java.util.List;
 @Controller
 @ComponentScan({"com.example.demo.dao"})
 @ComponentScan({"com.example.demo.entity"})
-public class SimpleController {
+public class WayBilController {
 
     WayBil wayBil_Reload;
 
@@ -28,6 +30,8 @@ public class SimpleController {
     @Autowired
     LookupService lookupService;
 
+    @Autowired
+    DriverService driverService;
 
     @Value("${APP_NOT_FOUND}")
     String appName;
@@ -42,7 +46,7 @@ public class SimpleController {
     public String getWayBils(Model model) {
         List<WayBil> wayBils = wayBilService.getAllWayBil();
         model.addAttribute("allWayBils", wayBils);
-        return "view_data.html";
+        return "/WayBil_Template/view_data.html";
     }
 
     @PostMapping("/getwaybil_fromhome")
@@ -60,7 +64,7 @@ public class SimpleController {
             model.addAttribute("list_lookup", lookupService.getGoodsLookup());
             model.addAttribute("list_status", lookupService.getStatusLookup());
             model.addAttribute("list_cars", lookupService.getCarsLookup());
-            return "update_form.html";
+            return "/WayBil_Template/update_form.html";
         }
     }
 
@@ -76,7 +80,7 @@ public class SimpleController {
             model.addAttribute("list_lookup", lookupService.getGoodsLookup());
             model.addAttribute("list_status", lookupService.getStatusLookup());
             model.addAttribute("list_cars", lookupService.getCarsLookup());
-            return "update_form.html";
+            return "/WayBil_Template/update_form.html";
         } else {
             model.addAttribute("waybil", new WayBil());
             model.addAttribute("message","با موفقیت ویرایش شد");
@@ -92,7 +96,7 @@ public class SimpleController {
         model.addAttribute("list_lookup", lookupService.getGoodsLookup());
         model.addAttribute("list_status", lookupService.getStatusLookup());
         model.addAttribute("list_cars", lookupService.getCarsLookup());
-        return "form.html";
+        return "/WayBil_Template/form.html";
     }
 
 
@@ -109,7 +113,7 @@ public class SimpleController {
             model.addAttribute("list_status", lookupService.getStatusLookup());
             model.addAttribute("list_cars", lookupService.getCarsLookup());
             model.addAttribute("message","شناسه ملی راننده تکراری است");
-            return "form.html";
+            return "/WayBil_Template/form.html";
         }
     }
 
@@ -127,12 +131,12 @@ public class SimpleController {
 
     @GetMapping("/test")
     public String selectWybil(Model model) {
-        WayBil wayBil = new WayBil();
-        wayBil = wayBilService.prepareForAdd();
-        model.addAttribute("waybil", wayBil);
-        model.addAttribute("list_lookup", lookupService.getGoodsLookup());
-        model.addAttribute("list_status", lookupService.getStatusLookup());
-        model.addAttribute("list_cars", lookupService.getCarsLookup());
-        return "test2";
+//        WayBil wayBil = new WayBil();
+//        wayBil = wayBilService.prepareForAdd();
+//        model.addAttribute("waybil", wayBil);
+//        model.addAttribute("list_lookup", lookupService.getGoodsLookup());
+//        model.addAttribute("list_status", lookupService.getStatusLookup());
+//        model.addAttribute("list_cars", lookupService.getCarsLookup());
+        return "/Driver_Template/form_driver.html";
     }
 }

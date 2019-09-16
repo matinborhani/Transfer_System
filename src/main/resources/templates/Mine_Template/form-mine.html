@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>ویرایش راننده</title>
+    <title>ویرایش معدن</title>
     <link rel="icon" type="image/png" href="images/logo.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -17,8 +17,8 @@
     <link rel="stylesheet" th:href="@{/css/dropdown_menu.css}" typeBar="text/css">
     <link rel="stylesheet" type="text/css" href="../static/css/main.css">
 
-    <!--for validate-->
-    <script type="text/javascript" th:src="@{/js/validate_Driver.js}"></script>
+    <script type="text/javascript" th:src="@{/js/validate_Mine.js}"></script>
+
 </head>
 <body onload="prepareWebPage()">
 
@@ -57,73 +57,74 @@
 
 
 <div class="container border rounded" style="width: 80%;" >
-    <div style="background-color: #2087cc;color: #FFFFFF;
+    <div style="background-color: #b19f81;color: #FFFFFF;
         height: 80px;width: 100%;text-align: center;" >
-        <label class="font_text" ><h2>ویرایش راننده</h2></label>
+        <label class="font_text" ><h2>ویرایش معدن</h2></label>
     </div>
     <form class="center font_text container" style="padding: 10px;" name="form"
-          action="#" th:action="@{/driver-update}" th:object="${driver}" method="post" dir="rtl">
+          action="#" th:action="@{/mine-update}" th:object="${mine}" method="post" dir="rtl">
 
         <div class="row" style="float: contour">
             <div class="col-sm-5" dir="rtl">
                 <div class="wrap-input100 alignment-right input-group" >
-                    <input class="input100" type="text"  th:field="*{namDrv}" id="name">
-                    <span class="focus-input100" data-placeholder="نام و نام خانوادگی راننده"></span>
+                    <input class="input100" type="text"  th:field="*{namMine}" id="name">
+                    <span class="focus-input100" data-placeholder="نام معدن"></span>
                 </div>
             </div>
             <div class="col-sm-5" >
                 <div class="wrap-input100 alignment-right input-group" >
-                    <input class="input100" type="number"  th:field="*{codNtnDrv}" id="national_code" onblur="validate_NTN_Code()">
-                    <span class="focus-input100" data-placeholder="شماره ملی راننده"></span>
+                    <input class="input100" type="number"  th:field="*{codNtnMine}" id="national_code" onblur="validate_NTN_Code_Mine()">
+                    <span class="focus-input100" data-placeholder="شناسه ملی معدن"></span>
                 </div>
-                <small id="hint_NTN_Driver" class="form-text text-danger"
+                <small id="hint_NTN_Mine" class="form-text text-danger"
                        style="display:block;font-size: medium;text-align: right;margin-right: 5px" dir="rtl">
 
                 </small>
             </div>
         </div>
-            <div class="row" style="float: contour;padding-top: 10px">
-                <div class="col-sm-5">
-                    <div class="wrap-input100 alignment-right input-group" >
-                        <input class="input100" type="number"  th:field="*{numLicsDrv}" id="lics_drv" onblur="validate_Lics_Drv()">
-                        <span class="focus-input100" data-placeholder="شماره گواهینامه راننده"></span>
-                    </div>
-                    <small id="hint_Lics_Driver" class="form-text text-danger"
-                           style="display:block;font-size: medium;text-align: right;margin-right: 5px" dir="rtl">
-
-                    </small>
+        <div class="row" style="float: contour;padding-top: 10px">
+            <div class="col-sm-5">
+                <div class="wrap-input100 alignment-right input-group" >
+                    <input class="input100" type="number"  th:field="*{codPostMine}" id="post_code" onblur="validate_Code_Post()">
+                    <span class="focus-input100" data-placeholder="کد پستی معدن"></span>
                 </div>
-                <div class="col-sm-5">
-                    <div class="wrap-input100 alignment-right input-group" >
-                        <input class="input100" type="number"  th:field="*{numTelDrv}" id="tel_drv" onblur="validate_Tel_Mine()">
-                        <span class="focus-input100" data-placeholder="تلفن راننده"></span>
-                    </div>
-                    <small id="hint_tel_Driver" class="form-text text-danger"
-                           style="display:block;font-size: medium;text-align: right;margin-right: 5px" dir="rtl">
+                <small id="hint_Code_Post" class="form-text text-danger"
+                       style="display:block;font-size: medium;text-align: right;margin-right: 5px" dir="rtl">
 
-                    </small>
-                </div>
+                </small>
             </div>
+            <div class="col-sm-5">
+                <div class="wrap-input100 alignment-right input-group" >
+                    <input class="input100" type="number"  th:field="*{numTelMine}" id="tel_mine" onblur="validate_Tel_Mine()">
+                    <span class="focus-input100" data-placeholder="تلفن معدن"></span>
+                </div>
+                <small id="hint_tel_Mine" class="form-text text-danger"
+                       style="display:block;font-size: medium;text-align: right;margin-right: 5px" dir="rtl">
+
+                </small>
+            </div>
+        </div>
         <div class="row" style="float: contour;padding-top: 10px">
             <div class="col-sm-10">
                 <div class="wrap-input100 alignment-right input-group" >
-                    <input class="input100" type="text"  th:field="*{addrHomeDrv}">
-                    <span class="focus-input100" data-placeholder="آدرس راننده"></span>
+                    <input class="input100" type="text"  th:field="*{addr}">
+                    <span class="focus-input100" data-placeholder="نشانی معدن"></span>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-3">
                 <input type="submit" class="btn btn-primary btn-lg btn-block"
-                       value="ویرایش راننده">
+                       value="ویرایش معدن">
             </div>
             <div class="col-sm-3">
-                <a href="/get-driver" class="btn btn-danger btn-lg btn-block">
+                <a href="/get-mine" class="btn btn-danger btn-lg btn-block">
                     لغو و بازگشت به صفحه اصلی</a>
             </div>
         </div>
     </form>
 </div>
+
 <script>
     function prepareWebPage() {
         debugger;

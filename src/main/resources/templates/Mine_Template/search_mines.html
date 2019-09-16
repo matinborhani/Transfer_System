@@ -2,16 +2,14 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>جستجو راننده</title>
+    <title>جستجو معادن</title>
     <link rel="icon" type="image/png" href="images/logo.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" th:href="@{/css/alignment.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/ViewData.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/dropdown_menu.css}" typeBar="text/css">
-    <script type="application/javascript" th:src="@{/js/driver_search.js}"></script>
-
-
+    <script type="application/javascript" th:src="@{/js/mine_search.js}"></script>
 </head>
 <body onload="prepareWebPage()">
 
@@ -48,38 +46,37 @@
 
 </nav>
 
-
 <div class="container">
     <div class="container"
-         style="background-color: #89c9a3;color: #FFFFFF;
+         style="background-color: #b19f81;color: #FFFFFF;
          height: 80px;width: 100%;text-align: center;" >
-        <label class="font_text" ><h2>جستجو راننده</h2></label>
+        <label class="font_text" ><h2>جستجو معادن</h2></label>
     </div>
     <div style="width: 40%;height: 250px;float: left">
-        <img src="/images/driver1.png">
+        <img src="/images/mine.png">
     </div>
     <div class="form-check" dir="rtl">
 
-        <input class="form-check-input" type="radio" checked style="margin-right: 25px" id="byId" onclick="clickById()">
+        <input class="form-check-input" type="radio" checked style="margin-right: 25px" id="byId" onclick="clickByNational()">
         <label class="form-check-label font_text" for="byId"
                style="margin-right: 5px">
-            جستجو با شماره ملی
+            جستجو با شناسه ملی
         </label>
 
         <input class="form-check-input" type="radio" value="" id="byName" onclick="clickByName()">
         <label class="form-check-label font_text" for="byName"
-            style="margin-right: 15px">
+               style="margin-right: 15px">
             جستجو با نام
         </label>
     </div>
 
     <div class="form-group" style="width: 50%;float: right;margin-top: 15px" id="search_By_NTN">
         <form class="form-group " dir="rtl" style="margin-right: 5px"
-              action="#" th:action="@{/get-driver}" th:object="${driver}" method="post">
-            <label for="name_Text" class="font_text">شماره ملی</label>
+              action="#" th:action="@{/get-mine}" th:object="${mine}" method="post">
+            <label for="name_Text" class="font_text">شناسه ملی معدن</label>
             <div class="form-inline "  >
                 <input type="number" class="form-control font_bzar w-75" id="name_Text" style="width: 60%;font-size: medium"
-                       placeholder="شماره ملی راننده را وارد کنید " th:field="*{codNtnDrv}" required>
+                       placeholder="شناسه ملی معدن را وارد کنید " th:field="*{codNtnMine}" required>
                 <button type="submit" >
                     <img src="/images/search.png" style="width: 30px;height: 30px">
                 </button>
@@ -89,18 +86,20 @@
 
     <div class="form-group" style="width: 50%;float: right;margin-top: 15px" id="search_By_Name">
         <form class="form-group " dir="rtl" style="margin-right: 5px"
-              action="#" th:action="@{/get-driver}" th:object="${driver}" method="post">
-            <label for="name" class="font_text">نام راننده</label>
+              action="#" th:action="@{/get-mine}" th:object="${mine}" method="post">
+            <label for="name" class="font_text">نام معدن</label>
             <div class="form-inline "  >
                 <input type="text" class="form-control font_bzar w-75" id="name" style="width: 60%;font-size: medium"
-                       placeholder="نام راننده را وارد کنید " th:field="*{namDrv}" required>
+                       placeholder="نام معدن را وارد کنید " th:field="*{namMine}" required>
                 <button type="submit" >
                     <img src="/images/search.png" style="width: 30px;height: 30px">
                 </button>
             </div>
         </form>
     </div>
+
 </div>
+
 <script>
     function prepareWebPage() {
         document.getElementById("search_By_Name").style.display="none";
@@ -112,6 +111,5 @@
     if (message != "")
         alert(message);
 </script>
-
 </body>
 </html>

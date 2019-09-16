@@ -3,7 +3,7 @@ create by matin borhani
 in 1398/06/05
  */
 
-function validate() {
+function validate_WayBil() {
     var resultWeight = checkWeight();
     if (resultWeight) {
         if (checkDateFormat()) {
@@ -62,7 +62,6 @@ function check_National_Code() {
         document.getElementById("hint_NTN_Driver").innerText = "";
         document.getElementById("national_Code_Driver").classList.remove("text-danger");
         document.getElementById("national_Code_Driver").classList.add("text-success");
-
     }
 }
 

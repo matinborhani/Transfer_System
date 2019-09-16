@@ -9,14 +9,15 @@
 
     <link rel="stylesheet" th:href="@{/css/alignment.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/table.css}" typeBar="text/css">
-    <link rel="stylesheet" href="../static/css/table.css" typeBar="text/css">
+    <link rel="stylesheet" href="../../static/css/table.css" typeBar="text/css">
 
     <!--for animate input-->
     <link rel="stylesheet" th:href="@{/css/main.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/upform.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/uputil.css}" typeBar="text/css">
     <link rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
-    <link rel="stylesheet" type="text/css" href="../static/css/main.css">
+    <link rel="stylesheet" th:href="@{/css/dropdown_menu.css}" typeBar="text/css">
+    <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -40,7 +41,7 @@
 
     <link rel="stylesheet" th:href="@{/css/jquery.md.bootstrap.datetimepicker.style.css}" typeBar="text/css">
     <script type="application/javascript" th:src="@{/js/jquery.md.bootstrap.datetimepicker.js}"></script>
-    <script type="application/javascript" th:src="@{/js/validate.js}"></script>
+    <script type="application/javascript" th:src="@{/js/validate_WayBil.js}"></script>
 
 </head>
 <body onload="prepareWebPage()">
@@ -50,16 +51,45 @@
     if (message != "")
         alert(message);
 </script>
-<nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light background-image">
 
+<!--Header-->
+<nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light background-image">
     <a href="/home"><img src="/images/logo.png"></a>
+    <div class="dropdown font_bnazanin">
+        <a class="dropbtn" style="font-size: larger">سرویس بارنامه</a>
+        <div class="dropdown-content">
+            <a href="/addwaybil">ثبت بارنامه</a>
+            <a href="/home">ویرایش بارنامه</a>
+            <a href="/getwaybils">مشاهده بارنامه ها</a>
+        </div>
+    </div>
+
+    <div class="dropdown font_bnazanin">
+        <a class="dropbtn" style="font-size: larger">سرویس راننده</a>
+        <div class="dropdown-content">
+            <a href="/get-driver">ویرایش راننده</a>
+            <a href="/drivers">مشاهده رانندگان</a>
+        </div>
+    </div>
+
+    <div class="dropdown font_bnazanin">
+        <a class="dropbtn" style="font-size: larger">سرویس معادن</a>
+        <div class="dropdown-content">
+            <a href="/get-mine">ویرایش معدن</a>
+            <a href="/mines">مشاهده معادن</a>
+        </div>
+    </div>
+
+
+
+
 </nav>
 
 <div>
 
 </div>
 <form dir="rtl" class="center font_text container" style="padding: 10px;" name="form"
-      action="#" th:action="@{/addwaybil}" th:object="${waybil}" method="post" onsubmit="return validate();">
+      action="#" th:action="@{/addwaybil}" th:object="${waybil}" method="post" onsubmit="return validate_WayBil();">
     <table dir="rtl " class="thead-light was-validated font_text">
         <div class="container" dir="rtl">
             <tr style="background-color: #2f9eb5">
@@ -209,7 +239,7 @@
                 <td>
                     <div class="wrap-input100 alignment-right input-group" dir="rtl"
                          style="margin-right: 60px;margin-top: 16px">
-                        <input class="input100" type="number" name="weight" th:field="*{senderIdentifyCode}"
+                        <input class="input100" type="number" name="weight" th:field="*{senderNationalCode}"
                                id="national_Identify_Sender"
                                maxlength="20" required="required" minlength="10" onblur="return check_Cod_NTN_Sender()">
                         <span class="focus-input100" data-placeholder="شناسه ملی فرستنده"></span>
@@ -259,7 +289,7 @@
                 </td>
                 <td>
                     <div class="wrap-input100 alignment-right input-group" dir="rtl" style="margin-right: 60px">
-                        <input class="input100" type="number" name="weight" th:field="*{receiverIdentifyCode}"
+                        <input class="input100" type="number" name="weight" th:field="*{receiverNationalCode}"
                                id="national_Identify_Receiver"
                                maxlength="20" required="required" minlength="10"
                                onblur="return check_Cod_NTN_Receiver()">

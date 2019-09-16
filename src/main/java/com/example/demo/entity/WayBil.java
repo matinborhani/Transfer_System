@@ -82,6 +82,8 @@ public class WayBil {
     String senderPhone;
     @Column(name = "NUM_NAT_IDENT_SNDR_WYBIL")
     String senderIdentifyCode;
+
+
     @Column(name = "NAM_RCV_WYBIL")
     String receiverName;
     @Column(name = "COD_NTNL_RCV_WYBIL")
