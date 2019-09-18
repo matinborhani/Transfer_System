@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>جستجو بارنامه</title>
+    <link rel="icon" type="image/png" href="images/logo.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/alignment.css}" typeBar="text/css">
+    <link rel="stylesheet" th:href="@{/css/ViewData.css}" typeBar="text/css">
+    <link rel="stylesheet" th:href="@{/css/dropdown_menu.css}" typeBar="text/css">
+    <script type="application/javascript" th:src="@{/js/driver_search.js}"></script>
+</head>
+<body>
+<!--Header-->
+<nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light background-image">
+    <a href="/home"><img src="/images/logo.png"></a>
+    <div class="dropdown font_bnazanin">
+        <a class="dropbtn" style="font-size: larger">سرویس بارنامه</a>
+        <div class="dropdown-content">
+            <a href="/addwaybil">ثبت بارنامه</a>
+            <a href="/home">ویرایش بارنامه</a>
+            <a href="/getwaybils">مشاهده بارنامه ها</a>
+        </div>
+    </div>
+
+    <div class="dropdown font_bnazanin">
+        <a class="dropbtn" style="font-size: larger">سرویس راننده</a>
+        <div class="dropdown-content">
+            <a href="/get-driver">ویرایش راننده</a>
+            <a href="/drivers">مشاهده رانندگان</a>
+        </div>
+    </div>
+
+    <div class="dropdown font_bnazanin">
+        <a class="dropbtn" style="font-size: larger">سرویس معادن</a>
+        <div class="dropdown-content">
+            <a href="/get-mine">ویرایش معدن</a>
+            <a href="/mines">مشاهده معادن</a>
+        </div>
+    </div>
+
+
+
+
+</nav>
+
+<div class="container">
+    <div class="container"
+         style="background-color: #63a0ff;color: #FFFFFF;
+         height: 80px;width: 100%;text-align: center;" >
+        <label class="font_text" ><h2>جستجو بارنامه</h2></label>
+    </div>
+    <div style="width: 40%;height: 250px;float: left;margin-top: 5px">
+        <img src="/images/waybil-vision.png">
+    </div>
+    <div class="form-group" style="width: 50%;float: right;margin-top: 15px" id="search_By_id">
+        <form class="form-group " dir="rtl" style="margin-right: 5px"
+              action="#" th:action="@{/getwaybil_fromhome}" th:object="${waybil}" method="post">
+            <label for="name_Text" class="font_text">شماره بارنامه</label>
+            <div class="form-inline "  >
+                <input type="number" class="form-control font_bzar w-75" id="name_Text"
+                       style="width: 60%;font-size: medium"
+                       placeholder="شماره بارنامه را وارد کنید " th:field="*{id}" required>
+                <button type="submit" >
+                    <img src="/images/search.png" style="width: 30px;height: 30px">
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var message = "[[${message_search_not_found_waybil}]]";
+    if (message != "")
+        alert(message);
+</script>
+</body>
+</html>

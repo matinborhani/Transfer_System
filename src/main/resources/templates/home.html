@@ -60,24 +60,24 @@
 <!--for navbar-->
 
 
-<div class="sidenav font_text" style="alignment: right;" align="right" id="sidebar_menu">
-    <a onclick="sideBar()">
-        <img src="/images/sidebar_menu.png" onclick="sideBar()">
-        <p onclick="sideBar()">          </p>
-    </a>
-    <a><img src="/images/logo.png"></a>
-    <a href="/addwaybil" style="margin-top: 10px">ایجاد بارنامه </a>
-    <a href="/getwaybils">مشاهده بارنامه ها</a>
-</div>
+<!--<div class="sidenav font_text" style="alignment: right;" align="right" id="sidebar_menu">-->
+    <!--<a onclick="sideBar()">-->
+        <!--<img src="/images/sidebar_menu.png" onclick="sideBar()">-->
+        <!--<p onclick="sideBar()">          </p>-->
+    <!--</a>-->
+    <!--<a><img src="/images/logo.png"></a>-->
+    <!--<a href="/addwaybil" style="margin-top: 10px">ایجاد بارنامه </a>-->
+    <!--<a href="/getwaybils">مشاهده بارنامه ها</a>-->
+<!--</div>-->
 
-<div class="sidenav-small font_text" style="alignment: right;display: none" align="right" id="sidebar_menu_small">
-    <a onclick="sideBar()">
-        <img src="/images/sidebar_menu.png" onclick="sideBar()">
-        <p onclick="sideBar()">             </p>
-    </a>
-    <a href="/addwaybil" style="margin-top: 10px;margin-right: 8px"><img src="/images/add_icon.png"></a>
-    <a href="/getwaybils" style="margin-top: 10px;margin-right: 5px"><img src="/images/list-screen.png"></a>
-</div>
+<!--<div class="sidenav-small font_text" style="alignment: right;display: none" align="right" id="sidebar_menu_small">-->
+    <!--<a onclick="sideBar()">-->
+        <!--<img src="/images/sidebar_menu.png" onclick="sideBar()">-->
+        <!--<p onclick="sideBar()">             </p>-->
+    <!--</a>-->
+    <!--<a href="/addwaybil" style="margin-top: 10px;margin-right: 8px"><img src="/images/add_icon.png"></a>-->
+    <!--<a href="/getwaybils" style="margin-top: 10px;margin-right: 5px"><img src="/images/list-screen.png"></a>-->
+<!--</div>-->
 
 
 <!-- Preload the Whole Page -->
@@ -159,19 +159,24 @@
 
     </div>
     <div class="huge-title centered">
-
+        <img src="/images/logo.png">
+        <br>
         <div class="logo-phone centered"><img alt="YOURLOGO" src="img/logo-phone.png"></div>
         <!-- This Logo is only displayed on Tablet/iPhone !-->
-        <form action="#" th:action="@{/getwaybil_fromhome}" th:object="${waybil}" method="post" name="form"
-              onsubmit="check_value_weight()">
-            <h1>جستجو </h1>
-            <input class="alignment-center font_text" th:field="*{id}" typeBar="number" style="width:40%;height: 50%;"
-                   id="pwd"
-                   placeholder="شماره بارنامه را وارد کنید" categoryName="pwd" required="required">
-            <button categoryName="id_waybil" typeBar="submit"><img src="/images/search.png" alt="Submit" width="25"
-                                                                   height="25" style="margin-right:10px "></button>
-            <div class="space"></div>
+        <button class="btn btn-primary btn-lg "
+                style="font-size: large;width: 80%;margin-top: 10px;">
+            <a href="/get-waybil" class="font_text" style="color: white">بارنامه ها </a>
+        </button>
 
+        <button class="btn btn-primary btn-lg"
+                style="font-size: large;width: 80%;margin-top: 10px;">
+            <a href="/get-driver"  class="font_text" style="color: white">رانندگان</a>
+        </button>
+
+        <button class="btn btn-primary btn-lg"
+                style="font-size: large;width: 80%;margin-top: 10px;">
+            <a href="/get-mine"  class="font_text" style="color: white">معادن</a>
+        </button>
         </form>
 
 

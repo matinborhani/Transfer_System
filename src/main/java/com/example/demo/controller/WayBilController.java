@@ -49,13 +49,20 @@ public class WayBilController {
         return "/WayBil_Template/view_data.html";
     }
 
+    @GetMapping("/get-waybil")
+    public String getWaybil(Model model){
+        model.addAttribute("waybil",new WayBil());
+        return "/WayBil_Template/search_waybil.html";
+    }
+
     @PostMapping("/getwaybil_fromhome")
     public String getWaybilHome(@ModelAttribute WayBil waybil, Model model) {
         WayBil wayBil = wayBilService.getById(waybil);
 
         if (wayBil == null) {
             model.addAttribute("waybil", new WayBil());
-            return "home_Danger_Alert.html";
+            model.addAttribute("message_search_not_found_waybil","بارنامه یافت نشد !");
+            return "/WayBil_Template/search_waybil.html";
         } else {
             wayBil_Reload = wayBil;
             wayBil = wayBilService.convertGeorgianToPersian(wayBil);
@@ -131,12 +138,9 @@ public class WayBilController {
 
     @GetMapping("/test")
     public String selectWybil(Model model) {
-//        WayBil wayBil = new WayBil();
-//        wayBil = wayBilService.prepareForAdd();
-//        model.addAttribute("waybil", wayBil);
-//        model.addAttribute("list_lookup", lookupService.getGoodsLookup());
-//        model.addAttribute("list_status", lookupService.getStatusLookup());
-//        model.addAttribute("list_cars", lookupService.getCarsLookup());
-        return "/Driver_Template/form_driver.html";
+
+        model.addAttribute("waybil",new WayBil());
+
+        return "/WayBil_Template/search_waybil.html";
     }
 }
