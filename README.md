@@ -12,6 +12,8 @@ Architecture of the project is MVC:
 *	Frontend Framework: HTML, CSS, JavaScript, Bootstrap (View)
 *	Management Dependency: Maven
 
+You can see Report in [Report.pdf](Report/Report.pdf)
+
 ## Structure of Project:
 1. Entity Class: these classes that save properties of entities and save in Database
   *	Driver: for Driver Class
