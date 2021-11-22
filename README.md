@@ -1,5 +1,5 @@
 # Intership
-During the Internship in [Irisa](www.irisaco.com), we decide to make a demo application to save, load, show waybills and all properties
+During the Internship in [Irisa](http://irisaco.com), we decide to make a demo application to save, load, show waybills and all properties
 In this project, we focus on 3 object:
 *	Waybill
 *	Driver
