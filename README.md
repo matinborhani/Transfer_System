@@ -1,9 +1,10 @@
 # Intership
 During the Internship in [Irisa](www.irisaco.com), we decide to make a demo application to save, load, show waybills and all properties
-In this project, we focus on 3 object
+In this project, we focus on 3 object:
 *	Waybill
 *	Driver
 *	Mine
+
 All data for 3 objects save and load from Database.
 Architecture of the project is MVC:
 *	Backend Framework: Spring (Controller)
@@ -31,6 +32,21 @@ Architecture of the project is MVC:
 
 ## Database
 In Irisa company, use Oracle Database. Fortunately, I work with this and PLSQL for writing Trigger and Stored Procedure.
+
+Tables :
+*	WayBil
+*	Mine
+*	Driver 
+
+Tables Triggers:
+*	Insert, Update WayBil
+*	Insert, Update Mine
+*	Insert, Update Driver 
+
+CRUD Operation: DDL Operation like SELECT, INSERT, UPDATE, DELETE
+*	SQL Queries
+*	Hibernate
+
 
 
 
